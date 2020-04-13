@@ -1,0 +1,25 @@
+{
+  "name": "blogapp",
+  "version": "1.0.0",
+  "description": "TWDB Blog App",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xyfka/BlogApp.git"
+  },
+  "keywords": [
+    "Blog",
+    "App",
+    "Tutorial",
+    "Simple"
+  ],
+  "author": "Lukasz Mazur",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xyfka/BlogApp/issues"
+  },
+  "homepage": "https://github.com/xyfka/BlogApp#readme"
+}
