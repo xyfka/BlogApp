@@ -38,8 +38,7 @@ app.get("/blogs", (req, res) => {
 
 // ------------------------------------------------------
 //  --------- Buckle Up Buckaroo ---------
-//     --------- Server Start ---------
- 
+//     --------- Server Start --------- 
 app.listen(3000, () => {
     console.log("BlogApp run on port 3000.");
 });
