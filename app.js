@@ -1,14 +1,17 @@
 // ---------   Standard setup  ---------
 var bodyParser      = require("body-parser"),
+    methodOverride  = require("method-override"),
     mongoose        = require("mongoose"), 
     express         = require("express"),
     app             = express();
     
 mongoose.set('useUnifiedTopology', true);
+mongoose.set('useFindAndModify', false);
 mongoose.connect("mongodb://localhost/blog_app", { useNewUrlParser: true });
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('public'));
+app.use(methodOverride("_method"));
 // ------------------------------------------------------
 // --------- Mongoose Mode Config ---------
 var blogSchema = new mongoose.Schema({
@@ -53,6 +56,41 @@ app.post("/blogs", (req, res) => {
 
 });
 
+// SHOW route
+app.get("/blogs/:id", (req, res) =>{
+    Blog.findById(req.params.id, (err, foundBlog) => {
+        if(err){
+            res.redirect("/blogs");
+        } else {
+            res.render("show", {blog: foundBlog});
+        }
+    });
+});
+
+
+// EDIT route
+app.get("/blogs/:id/edit", (req, res) => {
+    Blog.findById(req.params.id, (err, foundBlog) => {
+        if(err) {
+            res.redirect("/blogs");
+        } else {
+            res.render("edit", {blog: foundBlog});
+        }
+    });
+    
+});
+
+// UPDATE route
+app.put("/blogs/:id", (req, res) => {
+    Blog.findByIdAndUpdate(req.params.id, req.body.blog, (err, updatedBlog) => {
+        if(err){
+            res.redirect("/blogs");
+        } else {
+            res.redirect("/blogs/" + req.params.id);
+        }
+    });
+
+});
 
 // ------------------------------------------------------
 //  --------- Buckle Up Buckaroo ---------
