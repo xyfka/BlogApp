@@ -8,6 +8,7 @@ mongoose.set('useUnifiedTopology', true);
 mongoose.connect("mongodb://localhost/blog_app", { useNewUrlParser: true });
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static('public'));
 // ------------------------------------------------------
 // --------- Mongoose Mode Config ---------
 var blogSchema = new mongoose.Schema({
@@ -24,6 +25,7 @@ app.get("/", (req, res) => {
     res.redirect("/blogs");
 });
 
+// GET Index and NEW route
 app.get("/blogs", (req, res) => {
     Blog.find({}, (err, blogs) => {
         if(err){
@@ -33,6 +35,22 @@ app.get("/blogs", (req, res) => {
         res.render("index", {blogs: blogs});
         }    
     }); 
+});
+
+app.get("/blogs/new", (req, res) =>{
+    res.render("new");
+});
+
+// POST route
+app.post("/blogs", (req, res) => {
+    Blog.create(req.body.blog, (err, newBlog) => {
+        if(err){
+            res.render("new");
+        } else {
+            res.redirect("/blogs");
+        }
+    });
+
 });
 
 
