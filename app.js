@@ -92,6 +92,12 @@ app.put("/blogs/:id", (req, res) => {
 
 });
 
+// 
+
+app.delete("/blogs/:id", (req, res) => {
+    res.send("DELETED!");
+});
+
 // ------------------------------------------------------
 //  --------- Buckle Up Buckaroo ---------
 //     --------- Server Start --------- 
